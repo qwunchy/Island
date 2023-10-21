@@ -1,0 +1,57 @@
+[gd_scene load_steps=8 format=3 uid="uid://mgc0qwuit04k"]
+
+[ext_resource type="Script" path="res://door.gd" id="1_16tff"]
+[ext_resource type="Texture2D" uid="uid://6gx8r38yql1f" path="res://Sprout Lands - Sprites - Basic pack/Objects/doorshut.png" id="1_c8n6i"]
+[ext_resource type="Texture2D" uid="uid://dbwleccttsk3" path="res://Sprout Lands - Sprites - Basic pack/Objects/dooropen.png" id="2_b285s"]
+[ext_resource type="Script" path="res://Area2D.gd" id="3_j2dq6"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_evkm5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_b285s")
+}],
+"loop": true,
+"name": &"open",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_c8n6i")
+}],
+"loop": true,
+"name": &"shut",
+"speed": 0.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kk1u5"]
+size = Vector2(16, 3.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ceda7"]
+size = Vector2(16.865, 32.475)
+
+[node name="door" type="StaticBody2D"]
+position = Vector2(1, 0)
+disable_mode = 2
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_16tff")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_evkm5")
+animation = &"shut"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3.75)
+shape = SubResource("RectangleShape2D_kk1u5")
+
+[node name="Area2D" type="Area2D" parent="."]
+z_index = 1
+script = ExtResource("3_j2dq6")
+
+[node name="dooropen" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 2.5)
+shape = SubResource("RectangleShape2D_ceda7")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

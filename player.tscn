@@ -1,7 +1,8 @@
-[gd_scene load_steps=17 format=3 uid="uid://giautqqgkfeh"]
+[gd_scene load_steps=18 format=3 uid="uid://giautqqgkfeh"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_t13l5"]
 [ext_resource type="Texture2D" uid="uid://goowbf4tofj6" path="res://Sprout Lands - Sprites - Basic pack/Characters/Basic Charakter Spritesheet.png" id="2_uyh6b"]
+[ext_resource type="Script" path="res://Area2D.gd" id="3_jkvhc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fcrjt"]
 atlas = ExtResource("2_uyh6b")
@@ -134,14 +135,29 @@ animations = [{
 size = Vector2(10, 14)
 
 [node name="Player" type="CharacterBody2D"]
+y_sort_enabled = true
+collision_mask = 0
 script = ExtResource("1_t13l5")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+y_sort_enabled = true
 sprite_frames = SubResource("SpriteFrames_3kthq")
 animation = &"idle_down"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+y_sort_enabled = true
 shape = SubResource("RectangleShape2D_ynr7q")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(4, 4)
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("3_jkvhc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+y_sort_enabled = true
+shape = SubResource("RectangleShape2D_ynr7q")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

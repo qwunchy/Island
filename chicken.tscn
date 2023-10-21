@@ -1,0 +1,56 @@
+[gd_scene load_steps=9 format=3 uid="uid://cfn3rpkswqilp"]
+
+[ext_resource type="Script" path="res://chicken.gd" id="1_mfmca"]
+[ext_resource type="Texture2D" uid="uid://bre7ldxrpeo8j" path="res://Sprout Lands - Sprites - Basic pack/Characters/Free Chicken Sprites.png" id="1_xqmnh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ldjs6"]
+atlas = ExtResource("1_xqmnh")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1di8v"]
+atlas = ExtResource("1_xqmnh")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vm3qa"]
+atlas = ExtResource("1_xqmnh")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ptew4"]
+atlas = ExtResource("1_xqmnh")
+region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0te3n"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ldjs6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1di8v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vm3qa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ptew4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_so25o"]
+radius = 5.0
+
+[node name="chicken" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 10
+script = ExtResource("1_mfmca")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_0te3n")
+frame_progress = 0.633801
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 1)
+shape = SubResource("CircleShape2D_so25o")
